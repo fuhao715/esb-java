@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by fuhao on 13-12-16.
  * Project Name esb-java
  */
-public class AbsServiceFacade implements IMessageSender{
+public abstract class AbsServiceFacade implements IMessageSender{
 
 
     private static final ESBLogUtils log = ESBLogUtils.getLogger(AbsServiceFacade.class);
@@ -58,11 +58,6 @@ public class AbsServiceFacade implements IMessageSender{
             session.setProtocolType(null);
             session.setLocalTempData(null);
         }
-    }
-
-    @Override
-    public IMediationResponse send(IMediationRequest req) throws ESBBaseCheckedException {
-        return null;
     }
 
     @Override

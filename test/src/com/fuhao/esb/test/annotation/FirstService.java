@@ -11,7 +11,8 @@ import com.fuhao.esb.core.annotation.ServiceContainer;
 @ServiceContainer
 public class FirstService {
     @Service(serviceName = "esb_insertPO")
-    public String insertPO(){
+    public String insertPO(String str){
+        System.out.println("--------"+str);
         return "insertPO";
     }
 }

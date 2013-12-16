@@ -28,14 +28,15 @@
 
     <platform-event memo="平台事件配置">
         <class-scanner inclusionJars="(sword.+\.jar)|(gt3.+\.jar)"	inclusionClasses=".+" memo="类扫描框架配置">
-            <scanner annotation="ClusterCommunicationEventListenerScanner"
-                     scanner="com.css.sword.clusterCommunication.SwordClusterCommunicationManagger"
-                     memo="集群事件监听器扫描器"/>
             <!--
-            <scanner annotation="CtrlClassScanner"
-                scanner="com.css.sword.platform.web.controller.CtrlClassScanner"
-                memo="Web框架Ctrl类扫描器"/>
-            -->
+           <scanner annotation="ClusterCommunicationEventListenerScanner"
+                    scanner="com.css.sword.clusterCommunication.SwordClusterCommunicationManagger"
+                    memo="集群事件监听器扫描器"/>
+
+           <scanner annotation="CtrlClassScanner"
+               scanner="com.css.sword.platform.web.controller.CtrlClassScanner"
+               memo="Web框架Ctrl类扫描器"/>
+           -->
         </class-scanner>
 
         <started memo="平台启动完成事件处理器">
@@ -55,16 +56,18 @@
 
     <components memo="组件加载顺序：数据元组件、服务管理组件、事务处理监控组件、性能监控组件、多级缓存组件、集群通信组件、
 						持久层组件、服务中介管理组件、缓存数据管理组件、工作流组件、定时任务组件、单元测试数据收集器(最后加载)">
-
-        <component name="PersistenceComponentManager" debug="sql"
-                   component="com.css.esb.persistence.component.esbPersistenceComponentManager"
-                   defaultDsName="esbDS" memo="持久层组件：与数据元结构，提供数据持久化功能，并提供数据访问审计功能" />
         <!--
-        <component name="MediationComponentManager"  refreshCapacity="1" queryRemoteRouteInfo="running"
-            component="com.css.esb.mediation.sender.component.MediationComponentManager" memo="服务中介管理组件：提供服务的全域路由支持"/>
-        -->
+      <component name="PersistenceComponentManager" debug="sql"
+                 component="com.css.esb.persistence.component.esbPersistenceComponentManager"
+                 defaultDsName="esbDS" memo="持久层组件：与数据元结构，提供数据持久化功能，并提供数据访问审计功能" />
+
+      <component name="MediationComponentManager"  refreshCapacity="1" queryRemoteRouteInfo="running"
+          component="com.css.esb.mediation.sender.component.MediationComponentManager" memo="服务中介管理组件：提供服务的全域路由支持"/>
+
 
         <component name="ESBComponentManager" refreshCapacity="1" queryRemoteRouteInfo="running"       component="com.css.esb.esb.core.component.ESBComponentManager"
                    memo="ESB组件管理器：提供系统间集成、整合ESB基础功能"/>
+         -->
     </components>
+
  </esb-configuration>

@@ -14,7 +14,8 @@ import org.apache.log4j.Logger;
  * Project Name esb-java
  */
 public class ESBLogManager implements IESBLogMXBean{
-
+    protected static volatile boolean showSessionID = true;
+    protected static boolean showServiceCall = true;
     public void start() throws ESBBaseCheckedException {
         ESBPlatformMXBeanManager.registerMBean(null, "LogManager", this);
     }
@@ -54,5 +55,13 @@ public class ESBLogManager implements IESBLogMXBean{
             level = Logger.getRootLogger().getLevel();
         }
         return level.toString();
+    }
+
+    public static boolean isShowServiceCall() {
+        return showServiceCall;
+    }
+
+    private static void setShowServiceCall(boolean showServiceCall) {
+        ESBLogManager.showServiceCall = showServiceCall;
     }
 }

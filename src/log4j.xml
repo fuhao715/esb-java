@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	<!-- =======================日志文件输出器（类型及格式控制）================================================= -->
+	<!-- 业务系统文件日志输出器（按设置的大小自动生成新的日志文件） -->
+	<appender name="DOMAIN_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./logs/domain.log" />
+		<!--aram name="Threshold" value="INFO" / -->
+		<!--param name="Append" value="true" / -->
+		<param name="MaxFileSize" value="500KB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %4p [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 工作流文件日志输出器（按设置的大小自动生成新的日志文件） -->
+	<appender name="INFORFLOW_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./logs/inforflow.log" />
+		<!--param name="Threshold" value="INFO" / -->
+		<!--param name="Append" value="true" / -->
+		<param name="MaxFileSize" value="500KB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %4p [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Sword平台文件日志输出器（按设置的大小自动生成新的日志文件） -->
+	<appender name="SWORD_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./logs/sword.log" />
+		<!--param name="Threshold" value="INFO" / -->
+		<!--param name="Append" value="true" / -->
+		<param name="MaxFileSize" value="500KB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %4p [%c{1}] %m%n" />
+		</layout>
+		<!--
+	    <filter class="com.css.sword.kernel.platform.component.logger.SwordLogWriterAppenderFilter" >
+	    	<param name="noSQLDS" value="a" />
+	    	<param name="logTable" value="GT3Log" />
+	    </filter>
+	    -->
+	</appender>
+
+	<!-- 控制台日志输出器 -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<!--param name="Threshold" value="INFO" / -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %4p [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- =======================日志文件输出器（类过滤器）================================================= -->
+	<!-- =======================工作流==开始=============================== -->
+	<!-- 工作流日志文件 -->
+	<logger name="com.cvicse.workflow" additivity="true">
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<!--<appender-ref ref="INFORFLOW_FILE" /> -->
+	</logger>
+
+	<!-- 工作流日志控制台 -->
+	<logger name="com.cvicse.workflow.util.WorkflowConfig"
+		additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<!--<appender-ref ref="INFORFLOW_FILE" /> -->
+	</logger>
+	<!-- =======================工作流==结束=============================== -->
+
+	<!-- =======================Sword平台==开始=============================== -->
+	<logger name="com.mchange" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="SWORD_FILE" /> -->
+	</logger>
+	<!-- Sword平台日志===开始 -->
+	<logger name="com.css.sword.platform" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="SWORD_FILE" /> -->
+	</logger>
+	<logger name="com.css.sword" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="SWORD_FILE" /> -->
+	</logger>
+	<!-- Sword平台日志===结束 -->
+	<!-- Sword平台FTP服务器日志===开始 -->
+	<logger name="org.apache.ftpserver" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="SWORD_FILE" /> -->
+	</logger>
+	<!-- Sword平台FTP服务器日志===结束 -->
+	<!-- =======================Sword平台==结束=============================== -->
+
+	<!-- =======================默认日志输出器================================= -->
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="DOMAIN_FILE" /> -->
+	</root>
+</log4j:configuration>
