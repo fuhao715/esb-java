@@ -45,6 +45,11 @@ public interface IESBAccessMessage extends Serializable {
      * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     String getDestinationID();
+
+    String getSecurityPublicKey();
+
+    void setSecurityPublicKey(String securityPublicKey);
+
     /**
      *  获得发送方IP
      *@name    中文名称
