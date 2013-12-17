@@ -16,6 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Service {
     /**
+     * 服务名
      */
     String serviceName() default "";
 
