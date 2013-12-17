@@ -11,8 +11,8 @@ public interface IProtocolConf {
     /**
      * 交易的通讯协议类型
      */
-    public static enum ProtocolType {
-        LOCAL, EJB, JMS, EJB_BEAN, EJB_CONTAINER, JMS_BEAN, JMS_CONTAINER ,WEBSERVICE
+    public static enum ProtocolType { // 支持协议类型
+        LOCAL, EJB, JMS, EJB_BEAN, EJB_CONTAINER, JMS_BEAN, JMS_CONTAINER ,WEBSERVICE,HESSIAN,ACTIVEMQ,IBMMQ,RABBITMQ,SOCKET
     }
 
     String getProtocolID();
