@@ -13,11 +13,11 @@ import weblogic.application.ApplicationLifecycleListener;
 public class PlatformListener extends ApplicationLifecycleListener  {
     @Override
     public void postStart(ApplicationLifecycleEvent arg0) throws ApplicationException {
-        ESBPlatformManager.startPlatform();
+        ESBPlatformManager.startPlatform();    // 平台启动
     }
 
     @Override
     public void preStop(ApplicationLifecycleEvent arg0) throws ApplicationException {
-        ESBPlatformManager.stopPlatform();
+        ESBPlatformManager.stopPlatform();   // 平台停
     }
 }
