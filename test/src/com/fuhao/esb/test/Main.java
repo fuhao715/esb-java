@@ -9,6 +9,6 @@ import com.fuhao.esb.core.component.ESBPlatformManager;
  */
 public class Main {
     public static void main(String []args)  {
-        new ESBPlatformManager().startPlatform();
+        new ESBPlatformManager().startPlatform(); // 测试平台启动
     }
 }
