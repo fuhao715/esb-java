@@ -103,13 +103,6 @@ public class ESBPlatformMXBeanManager {
 
     /**
      * 注册MBean对象
-     *
-     * @Description 相关说明
-     * @Time 创建时间:2012-2-10下午2:56:30
-     * @param mbean
-     * @return
-     * @throws ESBBaseCheckedException
-     * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     public static String registerMBean(String mbeanType, String mbeanName, Object mbean) throws ESBBaseCheckedException {
         if (mbeanName == null || "".equals(mbeanName)) {
@@ -148,13 +141,6 @@ public class ESBPlatformMXBeanManager {
 
     /**
      * 注消MBean对象
-     *
-     * @Description 相关说明
-     * @param mbeanType
-     * @param mbeanName
-     * @throws ESBBaseCheckedException
-     * @Time 创建时间:2013-7-12下午4:22:59
-     * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     public static void unRegisterMBean(String mbeanType, String mbeanName) throws ESBBaseCheckedException {
         if (mbeanName == null || "".equals(mbeanName)) {
