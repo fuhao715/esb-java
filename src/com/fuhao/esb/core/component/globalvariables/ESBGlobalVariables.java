@@ -10,8 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Project Name esb-java
  */
 public final class ESBGlobalVariables implements IESBGlobalVariablesMXBean {
-
-
     private static Map<String, String> var = new ConcurrentHashMap<String, String>();
     private static final ESBGlobalVariables inst = new ESBGlobalVariables();
 
