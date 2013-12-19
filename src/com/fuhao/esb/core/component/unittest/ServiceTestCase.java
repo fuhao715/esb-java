@@ -14,6 +14,7 @@ import org.junit.rules.ExternalResource;
  * package name is  com.fuhao.esb.core.component.unittest
  * Created by fuhao on 13-12-16.
  * Project Name esb-java
+ * use for  服务测试单元框架
  */
 public abstract class ServiceTestCase {
 
