@@ -12,7 +12,7 @@
         <running-model model="product" memo="生产模式，在此模式下会自动跳过很多的校验和提示"/>
     </server-info>
 
-    <service generate-type="running" asyncServiceParallel="5" maxServiceCallLevel="50"
+    <service generate-type="running" maxServiceCallLevel="50"
              memo="服务组件配置信息:generate-type属性用于控制服务代理类的生成时机，startup表示服务器启动时生成，其它值表示首次调用时生成" >
         <!--	<filter name="mdm_saveMDVServiceFilter" beforeFilter=""
             afterFilter="com.css.esb.mdm.filter.SaveMDVServiceAfterFilter" exceptionFilter=""/>
@@ -27,20 +27,16 @@
     </develop-security-check>
 
     <platform-event memo="平台事件配置">
-        <class-scanner inclusionJars="(sword.+\.jar)|(gt3.+\.jar)"	inclusionClasses=".+" memo="类扫描框架配置">
+        <class-scanner inclusionJars="(esb.+\.jar)|(service.+\.jar)"	inclusionClasses=".+" memo="类扫描框架配置">
             <!--
            <scanner annotation="ClusterCommunicationEventListenerScanner"
-                    scanner="com.css.sword.clusterCommunication.SwordClusterCommunicationManagger"
+                    scanner="com.fuhao.esb.clusterCommunication.ESBClusterCommunicationManagger"
                     memo="集群事件监听器扫描器"/>
-
-           <scanner annotation="CtrlClassScanner"
-               scanner="com.css.sword.platform.web.controller.CtrlClassScanner"
-               memo="Web框架Ctrl类扫描器"/>
            -->
         </class-scanner>
 
         <started memo="平台启动完成事件处理器">
-            <!-- listener listener="com.css.sword.manger.listener.CommandLineListener" memo="平台命令行监听器"/-->
+            <!-- listener listener="com.fuhao.esb.manger.listener.CommandLineListener" memo="平台命令行监听器"/-->
 
         </started>
         <!--

@@ -1,5 +1,4 @@
-package com.fuhao.esb.core.util;
-
+package com.fuhao.esb.core.component.utils;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,8 +6,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
- * package name is  com.fuhao.esb.core.util
- * Created by fuhao on 13-12-9.
+ * package name is  com.fuhao.esb.core.component.utils
+ * Created by fuhao on 13-12-19.
  * Project Name esb-java
  */
 public class TemplateUtils {
@@ -70,13 +69,6 @@ public class TemplateUtils {
 
     /**
      * 根据模板生成字符串
-     *
-     * @Description 相关说明
-     * @Time 创建时间:2011-11-10上午9:12:39
-     * @param template
-     * @param attributes
-     * @return
-     * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     public static String generateString(String template, final Map<String, Object> attributes) {
         StringBuilder builder = new StringBuilder();

@@ -100,7 +100,8 @@ public class ESBServiceContainer {
         synchronized (this) {
             if (this.serviceProxy == null) {
                 try {
-                    this.serviceProxy = ESBServiceProxyClassGenerator.generateCode(this.serviceInfo);
+                    this.serviceProxy = ESBServiceProxyClassGenerator.generateCode(this.service.getClass().getClassLoader(),
+                            this.serviceInfo);
                     this.serviceProxy.setService(this.service);
                 } catch (ESBBaseCheckedException ex) {
                     // 更新并清理服务容器类
