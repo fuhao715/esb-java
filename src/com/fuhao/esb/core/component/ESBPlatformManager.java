@@ -18,6 +18,7 @@ import com.fuhao.esb.core.component.classScanner.scanner.ESBClassScanner;
 import com.fuhao.esb.core.component.classScanner.scanner.IESBClassScannerListener;
 import com.fuhao.esb.core.component.classloader.ESBClassLoaderManager;
 import com.fuhao.esb.core.component.globalvariables.ESBGlobalVariables;
+import com.fuhao.esb.core.component.log.ESBBaseLogManager;
 import com.fuhao.esb.core.component.threadPool.ESBThreadPoolManager;
 import com.fuhao.esb.core.component.utils.*;
 import com.fuhao.esb.core.component.service.ESBServiceUtils;
@@ -25,7 +26,6 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.fuhao.esb.core.component.log.ESBLogManager;
 import com.fuhao.esb.core.component.manager.ESBPlatformMXBeanManager;
 import com.fuhao.esb.core.component.manager.ServerContextVisitor;
 import com.fuhao.esb.core.component.AbsESBComponentManager.ComponentState;
@@ -266,7 +266,7 @@ public class ESBPlatformManager {
 
         log.info("开始初始化日志组件");
         {
-            ESBLogManager manager = new ESBLogManager();
+            ESBBaseLogManager manager = new ESBBaseLogManager();
             manager.start();
             ESBComponentRef.logManager = manager;
         }

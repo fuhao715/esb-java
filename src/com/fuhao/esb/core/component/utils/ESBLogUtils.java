@@ -1,8 +1,7 @@
 package com.fuhao.esb.core.component.utils;
 
 import com.fuhao.esb.core.component.ESBServerContext;
-import com.fuhao.esb.core.component.ESBServiceProxyClassGenerator;
-import com.fuhao.esb.core.component.log.ESBLogger;
+import com.fuhao.esb.core.component.log.ESBBaseLogger;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
 import com.fuhao.esb.core.exception.ExceptionInfos;
 import org.apache.log4j.Level;
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 public class ESBLogUtils {
 
-    private ESBLogger log = null;
+    private ESBBaseLogger log = null;
 
     protected ESBLogUtils(Class<?> clazz) {
         if (!ESBServerContext.isProductMode()) {
@@ -42,7 +41,7 @@ public class ESBLogUtils {
                 throw new IllegalArgumentException(msg.toString());
             }
         }
-        this.log = new ESBLogger(clazz);
+        this.log = new ESBBaseLogger(clazz);
     }
 
     public static ESBLogUtils getLogger(Class<?> clazz) {

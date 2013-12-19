@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  * Created by fuhao on 13-12-10.
  * Project Name esb-java
  */
-public class ESBLogManager implements IESBLogMXBean{
+public class ESBBaseLogManager implements IESBBaseLogMXBean {
     protected static volatile boolean showSessionID = true;
     protected static boolean showServiceCall = true;
     public void start() throws ESBBaseCheckedException {
@@ -62,6 +62,6 @@ public class ESBLogManager implements IESBLogMXBean{
     }
 
     private static void setShowServiceCall(boolean showServiceCall) {
-        ESBLogManager.showServiceCall = showServiceCall;
+        ESBBaseLogManager.showServiceCall = showServiceCall;
     }
 }

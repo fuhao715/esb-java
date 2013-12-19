@@ -4,7 +4,7 @@ import com.fuhao.esb.core.component.classScanner.ESBServiceInfo;
 import com.fuhao.esb.core.component.classScanner.IESBServiceProxy;
 import com.fuhao.esb.core.component.classloader.ESBClassLoader;
 import com.fuhao.esb.core.component.classloader.ESBClassLoaderManager;
-import com.fuhao.esb.core.component.log.ESBLogManager;
+import com.fuhao.esb.core.component.log.ESBBaseLogManager;
 import com.fuhao.esb.core.component.service.ESBServiceContainer;
 import com.fuhao.esb.core.component.utils.CheckUtils;
 import com.fuhao.esb.core.component.utils.org.objectweb.asm.ClassWriter;
@@ -141,7 +141,7 @@ public class ESBServiceProxyClassGenerator implements Opcodes {
             mv.visitVarInsn(ASTORE, VAR_1);
 
             // 输出服务调用信息
-            if (ESBLogManager.isShowServiceCall()) {
+            if (ESBBaseLogManager.isShowServiceCall()) {
                 // 输出被调用服务的位置信息
                 addLineLabel(mv, 2, "服务对象.log.debug(......);");
                 mv.visitVarInsn(ALOAD, THIS);

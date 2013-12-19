@@ -14,12 +14,12 @@ import org.apache.log4j.Logger;
  * Created by fuhao on 13-12-10.
  * Project Name esb-java
  */
-public class ESBLogger {
+public class ESBBaseLogger {
 
 
     private final Logger log;
 
-    public ESBLogger(Class<?> clazz) {
+    public ESBBaseLogger(Class<?> clazz) {
         this.log = org.apache.log4j.Logger.getLogger(clazz);
     }
 

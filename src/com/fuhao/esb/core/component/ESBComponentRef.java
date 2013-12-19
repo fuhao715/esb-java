@@ -2,7 +2,7 @@ package com.fuhao.esb.core.component;
 
 import com.fuhao.esb.core.component.classScanner.IESBServiceManager;
 import com.fuhao.esb.core.component.exception.IESBExceptionManagerMXBean;
-import com.fuhao.esb.core.component.log.ESBLogManager;
+import com.fuhao.esb.core.component.log.ESBBaseLogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class ESBComponentRef {
     /**
      * 日志管理器
      */
-    public static ESBLogManager logManager;
+    public static ESBBaseLogManager logManager;
     /**
      * 异常管理器
      */
