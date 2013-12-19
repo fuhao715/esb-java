@@ -159,11 +159,6 @@ public class BaseSession {
 
     /**
      * 获取父SessionID
-     *
-     * @Description 相关说明
-     * @return
-     * @Time 创建时间:2013-1-25下午1:58:48
-     * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     public String getParentSessionId() {
         return parentSessionId;
@@ -187,76 +182,48 @@ public class BaseSession {
     }
 
     /**
-     * 创建时间:2011-12-16上午10:02:04 get方法
-     *
-     * @return the systemContext
      */
     public ConcurrentHashMap<Object, Object> getSystemContext() {
         return systemContext;
     }
 
     /**
-     * 创建时间:2011-12-16上午10:02:04 set方法
-     *
-     * @param systemContext
-     *            the systemContext to set
      */
     public void setSystemContext(ConcurrentHashMap<Object, Object> systemContext) {
         this.systemContext = systemContext;
     }
 
     /**
-     * 创建时间:2011-12-16上午10:02:04 get方法
-     *
-     * @return the applicationContext
      */
     public ConcurrentHashMap<Object, Object> getApplicationContext() {
         return applicationContext;
     }
 
     /**
-     * 创建时间:2011-12-16上午10:02:04 set方法
-     *
-     * @param applicationContext
-     *            the applicationContext to set
      */
     public void setApplicationContext(ConcurrentHashMap<Object, Object> applicationContext) {
         this.applicationContext = applicationContext;
     }
 
     /**
-     * 创建时间:2011-10-19上午9:21:32 get方法
-     *
-     * @return the tmpData
      */
     public ConcurrentHashMap<Object, Object> getTmpData() {
         return tmpData;
     }
 
     /**
-     * 创建时间:2011-10-19上午9:21:32 set方法
-     *
-     * @param tmpData
-     *            the tmpData to set
      */
     public void setTmpData(ConcurrentHashMap<Object, Object> tmpData) {
         this.tmpData = tmpData;
     }
 
     /**
-     * 创建时间:2012-10-10上午11:50:00 get方法
-     *
-     * @return the localTempData
      */
     public ConcurrentHashMap<Object, Object> getLocalTempData() {
         return localTempData;
     }
 
     /**
-     * 创建时间:2012-10-10上午11:50:00 get方法
-     *
-     * @param localTempData
-     *            the localTempData to set
      */
     public void setLocalTempData(ConcurrentHashMap<Object, Object> localTempData) {
         this.localTempData = localTempData;
@@ -282,9 +249,6 @@ public class BaseSession {
 
     /**
      * 设置当前会话的服务调用层次
-     *
-     * @param count
-     * @return
      */
     public int changeServiceCallLevel(int count) {
         return this.serviceCallLevel.addAndGet(count);
