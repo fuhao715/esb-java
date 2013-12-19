@@ -23,11 +23,6 @@ public interface IESBExceptionManagerMXBean {
     public String getServerNames();
     /**
      * 当前服务器处理该请求消耗时间
-     *
-     * @Description 相关说明
-     * @return
-     * @Time 创建时间:2013-5-9下午2:59:32
-     * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     public long getTime();
 }
