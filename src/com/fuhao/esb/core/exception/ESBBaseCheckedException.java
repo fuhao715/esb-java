@@ -2,8 +2,8 @@ package com.fuhao.esb.core.exception;
 
 import com.fuhao.esb.core.component.ESBPlatformConstrants;
 import com.fuhao.esb.core.component.ESBServerContext;
+import com.fuhao.esb.core.component.utils.TemplateUtils;
 import com.fuhao.esb.core.session.ESBSessionUtils;
-import com.fuhao.esb.core.util.TemplateUtils;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
