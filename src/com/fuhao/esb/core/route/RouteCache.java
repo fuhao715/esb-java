@@ -2,6 +2,10 @@ package com.fuhao.esb.core.route;
 
 import com.fuhao.esb.common.request.IESBAccessMessage;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
+import com.fuhao.esb.core.route.protocal.IProtocalInfo;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * package name is  com.fuhao.esb.core.route
@@ -23,6 +27,29 @@ public class RouteCache {
         return singleton;
     }
 
+    // 路由规则处理器缓存
+    private Map<String,RoutePolicyInfo> mapRouteRule = new ConcurrentHashMap<String,RoutePolicyInfo>();
+
+    /**
+     * 协议配置缓存
+     */
+    private Map<String,IProtocalInfo> mapProtocalConf = new ConcurrentHashMap<String,IProtocalInfo>();
+
+    /**
+     * 路由配置缓存
+     */
+    private Map<String,RouteProtocalInfo> mapRouteConf = new ConcurrentHashMap<String,RouteProtocalInfo>();
+
+    public void clean(){
+        mapRouteRule.clear();
+        mapRouteConf.clear();
+        mapProtocalConf.clear();
+    }
+
+
+
+
+
     public boolean isLogXml(IESBAccessMessage message)throws ESBBaseCheckedException{
         return false; //TODO
     }
@@ -32,4 +59,36 @@ public class RouteCache {
         return routeProtocalInfo;
     }
 
+    // TODO 缓存路由信息
+    public void cacheRouteRule(){}
+    public void cacheRouteConf(){}
+    public void cacheProtocalConf(){}
+
+
+
+
+
+    public Map<String, RoutePolicyInfo> getMapRouteRule() {
+        return mapRouteRule;
+    }
+
+    public void setMapRouteRule(Map<String, RoutePolicyInfo> mapRouteRule) {
+        this.mapRouteRule = mapRouteRule;
+    }
+
+    public Map<String, IProtocalInfo> getMapProtocalConf() {
+        return mapProtocalConf;
+    }
+
+    public void setMapProtocalConf(Map<String, IProtocalInfo> mapProtocalConf) {
+        this.mapProtocalConf = mapProtocalConf;
+    }
+
+    public Map<String, RouteProtocalInfo> getMapRouteConf() {
+        return mapRouteConf;
+    }
+
+    public void setMapRouteConf(Map<String, RouteProtocalInfo> mapRouteConf) {
+        this.mapRouteConf = mapRouteConf;
+    }
 }
