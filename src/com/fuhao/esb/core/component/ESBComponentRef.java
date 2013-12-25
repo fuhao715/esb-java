@@ -3,6 +3,7 @@ package com.fuhao.esb.core.component;
 import com.fuhao.esb.core.component.classScanner.IESBServiceManager;
 import com.fuhao.esb.core.component.exception.IESBExceptionManagerMXBean;
 import com.fuhao.esb.core.component.log.ESBBaseLogManager;
+import com.fuhao.esb.core.component.sequence.AbsSequenceComponentManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class ESBComponentRef {
     /**
      * 中介服务管理器
      */
-   // public static IESBComponentManager esbManager;
+    public static IESBComponentManager esbManager;
 
     /**
      * 性能监控组件管理器
@@ -69,4 +70,8 @@ public class ESBComponentRef {
      * NoSQL数据库管理组件
      */
     // public static IESBNoSQLComponentManager noSqlManager;
+    /**
+     * 单据号组件管理器
+     */
+    public static AbsSequenceComponentManager sequenceManager;
 }

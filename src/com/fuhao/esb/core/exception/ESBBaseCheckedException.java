@@ -40,6 +40,16 @@ public class ESBBaseCheckedException extends Exception implements IESBBaseExcept
 
     private final long time = System.currentTimeMillis();
 
+    private Map<String, Object> reasonMap = null;
+
+    public Map<String, Object> getReasonMap() {
+        return reasonMap;
+    }
+
+    public void setReasonMap(Map<String, Object> reasonMap) {
+        this.reasonMap = reasonMap;
+    }
+
     public ESBBaseCheckedException(String message) {
         this.message = message;
         this.addServerName();

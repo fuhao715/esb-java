@@ -34,7 +34,7 @@ public interface IESBAccessMessage extends Serializable {
      *@return
      * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
-    String getSystemID();
+    String getChannelID();
 
     /**
      *
@@ -47,8 +47,6 @@ public interface IESBAccessMessage extends Serializable {
     String getDestinationID();
 
     String getSecurityPublicKey();
-
-    void setSecurityPublicKey(String securityPublicKey);
 
     /**
      *  获得发送方IP

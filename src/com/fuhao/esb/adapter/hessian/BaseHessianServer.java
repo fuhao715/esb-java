@@ -4,6 +4,8 @@ import com.fuhao.esb.client.IBaseESBMessageReceiver;
 import com.fuhao.esb.common.request.IESBAccessMessage;
 import com.fuhao.esb.common.response.IESBReturnMessage;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
+import com.fuhao.esb.core.inbound.AbstractAccessHandler;
+import com.fuhao.esb.core.inbound.AccessHandlerManager;
 
 /**
  * package name is  com.fuhao.esb.adapter.hessian
@@ -14,17 +16,13 @@ public class BaseHessianServer implements IBaseESBMessageReceiver{
     @Override
     public IESBReturnMessage receiveBean(IESBAccessMessage message)
             throws ESBBaseCheckedException,Exception {
-        //获得客户端ip并放入request中
-        //TODO IP添加
-//		message.setIP(ServiceContext.getContextRequest().getRemoteAddr());
-        // AbstractAccessHandler manager = AccessHandlerManager.getAccessHandler();
-        return null;//manager.processAccessBean(message);
+        AbstractAccessHandler manager = AccessHandlerManager.getAccessHandler();
+        return manager.processAccessBean(message);
     }
 
     @Override
     public String receiveXML(String xml) throws ESBBaseCheckedException,Exception {
-        // AbstractAccessHandler manager = AccessHandlerManager.getAccessHandler();
-        // ServiceContext.getContextRequest().getRemoteAddr() TODO IP添加
-        return null;//manager.processAccessXML(xml);
+        AbstractAccessHandler manager = AccessHandlerManager.getAccessHandler();
+        return manager.processAccessXML(xml);
     }
 }
