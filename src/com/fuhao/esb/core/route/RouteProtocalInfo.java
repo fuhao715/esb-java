@@ -18,7 +18,7 @@ public class RouteProtocalInfo {
      * 协议提供者节点编码
      * （下一个交易节点）
      */
-    private String NextNode = protocalInfo.getNodeName();
+    private String nextNode = protocalInfo.getNodeName();
 
     /**
      * 协议提供者节点是否esb节点
@@ -51,11 +51,11 @@ public class RouteProtocalInfo {
     }
 
     public String getNextNode() {
-        return NextNode;
+        return nextNode;
     }
 
     public void setNextNode(String nextNode) {
-        NextNode = nextNode;
+        this.nextNode = nextNode;
     }
 
     public boolean isNextNodeisESbNode() {

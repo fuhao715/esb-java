@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<route-configuration>
+    <routePolicyInfos memo="">
+        <routePolicyInfo  protocalEL="" routePolicy="" routeProtocalInfoID=""  memo=""></routePolicyInfo>
+
+    </routePolicyInfos>
+    <routes memo="">
+        <route routeProtocalInfoID="" protocalInfoID="" nextNodeisESbNode="" beforeTransPreprocessServerName="" afterTransPreprocessServerName="" memo=""></route>
+    </routes>
+
+    <protocals memo="">
+        <protocal protocalInfoID="" protocalType="EJB" providerUrls=""  contextFactory=""  jndi=""  userName=""  passWord=""  connetTimeOut=""  callTimeOut=""   nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="JMS" providerUrls="" contextFactory="" connetFactory="" jndi="" rmiRequestTimeout="" jndiRequestTimeout=""  isSyn="" isQueue="true/false" callTimeOutOut=""  nodeName=""  memo="">
+            <!-- isQueue false时为topic方式，true则为queue方式;  isSyn是否同步  false为异步方式 true为同步方式 -->
+        </protocal>
+        <protocal protocalInfoID="" protocalType="WEBSERVICE" wsdl="" methodName="" connetTime="" callTimeOut="" nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="HESSIAN" providerUrls="" nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="ACTIVEMQ" nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="IBMMQ"  nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="RABBITMQ" nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="SOCKET" providerUrls="" callTimeOut="" nodeName=""  memo="">
+        </protocal>
+        <protocal protocalInfoID="" protocalType="FTP" providerUrls="" port="" path="" userName="" passWord=""  nodeName=""  memo="">
+        </protocal>
+    </protocals>
+</route-configuration>

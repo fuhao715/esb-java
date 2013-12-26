@@ -27,6 +27,11 @@ public class RouteCache {
         return singleton;
     }
 
+    /*
+	 * 路由版本缓存
+	 */
+    private Long routeVersion = 0L;
+
     // 路由规则处理器缓存
     private Map<String,RoutePolicyInfo> mapRouteRule = new ConcurrentHashMap<String,RoutePolicyInfo>();
 
@@ -47,6 +52,16 @@ public class RouteCache {
     }
 
 
+    // TODO 缓存路由信息
+    public void cacheRouteRule(){}
+    public void cacheRouteConf(){}
+    public void cacheProtocalConf(){}
+
+
+
+
+
+
 
 
 
@@ -59,15 +74,14 @@ public class RouteCache {
         return routeProtocalInfo;
     }
 
-    // TODO 缓存路由信息
-    public void cacheRouteRule(){}
-    public void cacheRouteConf(){}
-    public void cacheProtocalConf(){}
 
+    public Long getRouteVersion() {
+        return routeVersion;
+    }
 
-
-
-
+    public void setRouteVersion(Long routeVersion) {
+        this.routeVersion = routeVersion;
+    }
     public Map<String, RoutePolicyInfo> getMapRouteRule() {
         return mapRouteRule;
     }

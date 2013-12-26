@@ -12,8 +12,8 @@ public class WebServiceProtocalInfo implements IProtocalInfo {
     private String nodeName;
     private String wsdl; // wsdl地址
     private String methodName; // 方法名
-    private String connetTime; // 连接超时
-    private String callTime;  //调用超时
+    private String connetTimeOut; // 连接超时
+    private String callTimeOut;  //调用超时
 
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
@@ -35,20 +35,24 @@ public class WebServiceProtocalInfo implements IProtocalInfo {
         this.methodName = methodName;
     }
 
-    public String getConnetTime() {
-        return connetTime;
+    public void setProtocalID(String protocalID) {
+        this.protocalID = protocalID;
     }
 
-    public void setConnetTime(String connetTime) {
-        this.connetTime = connetTime;
+    public String getConnetTimeOut() {
+        return connetTimeOut;
     }
 
-    public String getCallTime() {
-        return callTime;
+    public void setConnetTimeOut(String connetTimeOut) {
+        this.connetTimeOut = connetTimeOut;
     }
 
-    public void setCallTime(String callTime) {
-        this.callTime = callTime;
+    public String getCallTimeOut() {
+        return callTimeOut;
+    }
+
+    public void setCallTimeOut(String callTimeOut) {
+        this.callTimeOut = callTimeOut;
     }
 
     @Override
