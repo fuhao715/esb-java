@@ -21,6 +21,15 @@ public class JMSProtocalInfo  implements IProtocalInfo {
     private String callTimeOutOut;  //调用超时
     private String isSyn;
     private boolean isQueue;  // "true/false"
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public void setProtocalID(String protocalID) {
         this.protocalID = protocalID;

@@ -21,4 +21,5 @@ public interface IProtocalInfo {
      * 获取协议提供者节点信息
      */
     public String getNodeName();
+    public String getMemo() ;
 }

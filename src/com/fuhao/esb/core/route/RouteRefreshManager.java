@@ -21,25 +21,19 @@ public class RouteRefreshManager {
 
     //构造公平的可重入锁
     private ReentrantLock lock = new ReentrantLock(true);
-    private Map<String, String> parameter = new HashMap<String,String>();
 
     public void start() throws ESBBaseCheckedException {
-        /*
-        读取路由配置xml文件
-         */
-
-
-
 
 		/* 启动时设置初始版本号，获得表的版本号set到内存中 */
-        Long version = getRouteVersio(parameter);
+        RouteFileUtils routeFileUtils = new RouteFileUtils() ;
+        Long version = routeFileUtils.getRouteConfVersion();
         if(null != version){
             RouteCache.getInstance().setRouteVersion(version);
         }else{
             RouteCache.getInstance().setRouteVersion(0L);
         }
         // 从qz_dmb中查询刷新频率时间
-        Long refreshCapacity = getRefreshCapacity(parameter);
+        Long refreshCapacity = routeFileUtils.getRefreshCapacity();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -58,27 +52,15 @@ public class RouteRefreshManager {
         }, 0, refreshCapacity);
     }
 
-    private Long getRouteVersio(Map<String, String> parameter) throws ESBBaseCheckedException{
-        Long version = null;  //TODO 读取路由版本号，进行比对刷新
-
-        return version;
-    }
-
-    private Long getRefreshCapacity(Map<String, String> parameter)throws ESBBaseCheckedException{
-        // 从qz_dmb中查询刷新频率时间
-        Long refreshCapacity = 300L;//TODO  默认5分钟的刷新频率
-        return refreshCapacity;
-    }
-
     private void refreshRoute() throws ESBBaseCheckedException{
-        Long currentVersion = getRouteVersio(parameter);
+        Long currentVersion = new RouteFileUtils().getRouteConfVersion();
         if(null == currentVersion)
             currentVersion = 0L; // 若库中未配置路由版本号，默认为0L
         Long memoryVersion = RouteCache.getInstance().getRouteVersion();
         if(currentVersion>memoryVersion){
             Map<String, String> mapParameter = ESBComponentManager.getInitMapParameter();
             //缓存路由
-            new RouteLoader().loadRoute(parameter);//采用服务方式调用，以免连接不释放
+            new RouteLoader().loadRoute();//采用服务方式调用，以免连接不释放
             RouteCache.getInstance().setRouteVersion(currentVersion);
         }
     }

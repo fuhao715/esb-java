@@ -33,6 +33,15 @@ public class RouteProtocalInfo {
      * 交易后预处理服务
      */
     private String afterTransPreprocessServerName ;
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public String getRouteProtocalInfoID() {
         return routeProtocalInfoID;

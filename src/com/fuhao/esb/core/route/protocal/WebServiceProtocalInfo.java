@@ -14,6 +14,15 @@ public class WebServiceProtocalInfo implements IProtocalInfo {
     private String methodName; // 方法名
     private String connetTimeOut; // 连接超时
     private String callTimeOut;  //调用超时
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;

@@ -9,6 +9,7 @@ import com.fuhao.esb.common.vo.Constants.ROUTE_POLICY;
  * Project Name esb-java
  */
 public class RoutePolicyInfo {
+    private String routeRuleID;
     /**
      * 协议路由处理表达式
      */
@@ -22,6 +23,23 @@ public class RoutePolicyInfo {
      * 路由信息id
      */
     private String routeProtocalInfoID;
+    private String memo;
+
+    public String getRouteRuleID() {
+        return routeRuleID;
+    }
+
+    public void setRouteRuleID(String routeRuleID) {
+        this.routeRuleID = routeRuleID;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public String getProtocalEL() {
         return protocalEL;

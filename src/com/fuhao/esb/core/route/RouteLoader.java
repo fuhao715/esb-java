@@ -12,7 +12,7 @@ import java.util.Map;
 public class RouteLoader {
 
 
-    public void loadRoute(Map<String, String> parameter) throws ESBBaseCheckedException{
+    public void loadRoute() throws ESBBaseCheckedException{
 
     }
 }

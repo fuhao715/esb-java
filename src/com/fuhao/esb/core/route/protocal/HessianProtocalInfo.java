@@ -11,6 +11,15 @@ public class HessianProtocalInfo  implements IProtocalInfo {
     private String protocalID;
     private String providerUrls;
     private String nodeName;
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public void setProtocalID(String protocalID) {
         this.protocalID = protocalID;

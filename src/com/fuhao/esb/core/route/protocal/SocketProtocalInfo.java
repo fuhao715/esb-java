@@ -12,6 +12,15 @@ public class SocketProtocalInfo  implements IProtocalInfo {
     private String providerUrls;
     private String nodeName;
     private String callTimeOut;  //调用超时
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 
     public void setProtocalID(String protocalID) {
         this.protocalID = protocalID;
