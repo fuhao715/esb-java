@@ -22,6 +22,10 @@ public class RouteRefreshManager {
     //构造公平的可重入锁
     private ReentrantLock lock = new ReentrantLock(true);
 
+    /**
+     * 路由刷新定时器
+     * @throws ESBBaseCheckedException
+     */
     public void start() throws ESBBaseCheckedException {
 
 		/* 启动时设置初始版本号，获得表的版本号set到内存中 */

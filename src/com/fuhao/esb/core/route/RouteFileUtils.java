@@ -23,6 +23,7 @@ import java.util.Map;
  * package name is  com.fuhao.esb.core.route
  * Created by fuhao on 13-12-26.
  * Project Name esb-java
+ * 路由配置文件读取工具类
  */
 public class RouteFileUtils {
     private  static  ESBLogUtils logger = ESBLogUtils.getLogger(RouteFileUtils.class);
@@ -43,7 +44,10 @@ public class RouteFileUtils {
         return Long.parseLong(version);
     }
 
-
+    /**
+     * 读取解析路由配置文件
+     * @return
+     */
     public static  Element readRouteConfFile(){
         SAXReader reader = new SAXReader();
         Document doc = null;
@@ -60,8 +64,10 @@ public class RouteFileUtils {
     }
 
 
-
-
+    /**
+     * 加载路由规则，路由配置，协议信息
+     * @throws ESBBaseCheckedException
+     */
     public  static void loadRoutConfig() throws ESBBaseCheckedException {
 
         List<Element> routsRule = null;

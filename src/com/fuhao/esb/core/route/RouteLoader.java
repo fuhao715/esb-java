@@ -11,7 +11,9 @@ import java.util.Map;
  */
 public class RouteLoader {
 
-
+    /*
+    加载路由
+     */
     public void loadRoute() throws ESBBaseCheckedException{
         RouteFileUtils.loadRoutConfig(); // 读取配置文件并缓存
         // cache 全匹配路由算法，以及访问次数缓存算法。

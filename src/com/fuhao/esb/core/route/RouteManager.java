@@ -8,6 +8,9 @@ import com.fuhao.esb.common.request.IESBAccessMessage;
  * Project Name esb-java
  */
 public class RouteManager {
+    /*
+    获取路由
+     */
     public RouteProtocalInfo getRoute(IESBAccessMessage message){
         RouteProtocalInfo routeProtocalInfo = null;
 
