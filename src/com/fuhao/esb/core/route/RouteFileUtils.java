@@ -1,12 +1,16 @@
 package com.fuhao.esb.core.route;
+import com.fuhao.esb.common.vo.Constants;
 import com.fuhao.esb.common.vo.Constants.ROUTE_POLICY;
 import com.fuhao.esb.core.component.utils.ESBFileUtils;
 import com.fuhao.esb.core.component.utils.ESBLogUtils;
+import com.fuhao.esb.core.component.utils.ObjectUtils;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
+import com.fuhao.esb.core.route.protocal.IProtocalInfo;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import weblogic.wsee.util.ObjectUtil;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -21,32 +25,29 @@ import java.util.Map;
  * Project Name esb-java
  */
 public class RouteFileUtils {
-    private ESBLogUtils logger = ESBLogUtils.getLogger(RouteFileUtils.class);
-    Element rootElement = null;
-
-    public  RouteFileUtils(){
-         this.rootElement =   readRouteConfFile();
-    }
+    private  static  ESBLogUtils logger = ESBLogUtils.getLogger(RouteFileUtils.class);
 
 
-    public Long getRouteConfVersion(){
-        String version = rootElement.attributeValue("version") ;
+
+    public static Long getRouteConfVersion(){
+        String version = readRouteConfFile().attributeValue("version") ;
          return Long.parseLong(version);
     }
 
-    public void setRouteConfVersion(){
+    public static void setRouteConfVersion(){
         RouteCache.getInstance().setRouteVersion(getRouteConfVersion());
     }
 
-    public Long getRefreshCapacity(){
-        String version = rootElement.attributeValue("refreshCapacity") ;
+    public  static  Long getRefreshCapacity(){
+        String version = readRouteConfFile().attributeValue("refreshCapacity") ;
         return Long.parseLong(version);
     }
 
 
-    public Element readRouteConfFile(){
+    public static  Element readRouteConfFile(){
         SAXReader reader = new SAXReader();
         Document doc = null;
+        Element   rootElement = null;
         try {
             doc = reader.read(new File(ESBFileUtils.getESBRootPath() + "/router.xml"));
             rootElement = doc.getRootElement();
@@ -61,13 +62,14 @@ public class RouteFileUtils {
 
 
 
-    public void loadRoutConfigParameters() throws ESBBaseCheckedException {
+    public  static void loadRoutConfig() throws ESBBaseCheckedException {
 
         List<Element> routsRule = null;
         List<Element> routs = null;
         List<Element> protocals = null;
         // 设置路由版本号
         setRouteConfVersion();
+        Element   rootElement =  readRouteConfFile() ;
 
 
         // 组件配置信息
@@ -79,58 +81,72 @@ public class RouteFileUtils {
 
 
         // 加载路由规则处理器:
-        getRoutesRule(protocals);
+        cacheRoutesRule(routsRule);
         // 路由处理器
-        getRouts(routs);
+        cacheRouts(routs);
         // 协议处理器
-        getprotocals(protocals);
+        cacheprotocals(protocals);
     }
 
-    public Object getParamter2Object(Element element,Object object) throws ESBBaseCheckedException{
-        if (element == null) {
-            return null;
-        }
-        Iterator<Attribute> itr = element.attributeIterator();
-        while (itr.hasNext()) {
-            Attribute attribute = itr.next();
-            // parameter.put(attribute.getName(), attribute.getValue());
-            try{
-            String setMethodName = "set" + attribute.getName().substring(0,1).toUpperCase() + attribute.getName().substring(1);
-            Method method = object.getClass().getMethod(setMethodName, new Class[] { String.class });
-            if(method ==null){
-                    method = object.getClass().getMethod(setMethodName, new Class[] { Boolean.class });
-            }
-            if(method ==null){
-                method = object.getClass().getMethod(setMethodName, new Class[] { ROUTE_POLICY.class });
-            }
-
-            method.invoke(object, new Object[] { attribute.getValue() });
-            }catch(Exception ex){
-               throw new ESBBaseCheckedException("利用反射构造路由信息对象错误");
-            }
-        }
-
-        return object;
-     }
 
 
-    public void   getRoutesRule(List<Element> routsRule)  throws ESBBaseCheckedException{
+
+    public  static  void   cacheRoutesRule(List<Element> routsRule)  throws ESBBaseCheckedException{
         // 从配置文件加载组件
-        Map<String, RoutePolicyInfo> ruleConfigParameters = new HashMap<String, RoutePolicyInfo>();
+        Map<String, RoutePolicyInfo> ruleConfigParameters = RouteCache.getInstance().getMapRouteRule();
         for (Element rule : routsRule) {
             String id = rule.attributeValue("routeRuleID");
             // 读取结点的属性信息
-            RoutePolicyInfo routePolicyInfo = (RoutePolicyInfo)getParamter2Object(rule,new RoutePolicyInfo());
+            Map eleMap =  ObjectUtils.getParamter(rule);
+            try{
+                RoutePolicyInfo routePolicyInfo = (RoutePolicyInfo) ObjectUtils.map2vo(eleMap, new RoutePolicyInfo());
+                // 生成配置信息对象
+                ruleConfigParameters.put(id, routePolicyInfo);
+            }catch (Exception ex){
+                throw new ESBBaseCheckedException(ex);
+            }
 
-            // 生成配置信息对象
-            ruleConfigParameters.put(id, routePolicyInfo);
         }
 
     }
-    public void   getRouts(List<Element> routs){
+    public  static  void   cacheRouts(List<Element> routs) throws ESBBaseCheckedException{
+
+        // 从配置文件加载组件
+        Map<String, RouteProtocalInfo> routConfigParameters = RouteCache.getInstance().getMapRouteConf();
+        for (Element rout : routs) {
+            String id = rout.attributeValue("routeProtocalInfoID");
+            // 读取结点的属性信息
+            Map eleMap =  ObjectUtils.getParamter(rout);
+            try{
+                RouteProtocalInfo routeProtocalInfo = (RouteProtocalInfo) ObjectUtils.map2vo(eleMap, new RouteProtocalInfo());
+                // 生成配置信息对象
+                routConfigParameters.put(id, routeProtocalInfo);
+            }catch (Exception ex){
+                throw new ESBBaseCheckedException(ex);
+            }
+
+        }
 
     }
-    public void   getprotocals(List<Element> protocals){
+    public  static  void   cacheprotocals(List<Element> protocals) throws ESBBaseCheckedException{
+
+        // 从配置文件加载组件
+        Map<String, IProtocalInfo> protocalConfigParameters = RouteCache.getInstance().getMapProtocalConf();
+        for (Element protocal : protocals) {
+            String id = protocal.attributeValue("routeRuleID");
+            String protocalType = protocal.attributeValue("protocalType") ;
+            // 读取结点的属性信息
+            Map eleMap =  ObjectUtils.getParamter(protocal);
+
+            try{
+                IProtocalInfo protocalInfo = (IProtocalInfo) ObjectUtils.map2vo(eleMap, Constants.getProtocalInfoType(protocalType));
+                // 生成配置信息对象
+                protocalConfigParameters.put(id, protocalInfo);
+            }catch (Exception ex){
+                throw new ESBBaseCheckedException(ex);
+            }
+
+        }
 
     }
 

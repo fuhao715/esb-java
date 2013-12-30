@@ -14,6 +14,7 @@ public class RouteProtocalInfo {
      * 具体协议信息
      */
     private IProtocalInfo protocalInfo;
+    private String protocalID;
     /**
      * 协议提供者节点编码
      * （下一个交易节点）
@@ -34,6 +35,15 @@ public class RouteProtocalInfo {
      */
     private String afterTransPreprocessServerName ;
     private String memo;
+
+    public String getProtocalID() {
+        return protocalID;
+    }
+
+    public void setProtocalID(String protocalID) {
+        this.protocalID = protocalID;
+        protocalInfo =RouteCache.getInstance().getMapProtocalConf().get(protocalID);
+    }
 
     public String getMemo() {
         return memo;

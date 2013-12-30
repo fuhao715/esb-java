@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <route-configuration version="0" refreshCapacity="10">
     <routePolicyInfos memo="">
-        <routePolicyInfo routeRuleID=""  protocalEL="" routePolicy="" routeProtocalInfoID=""  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r1"  protocalEL="COO.CQ.CX" routePolicy="FULLNAME" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
 
     </routePolicyInfos>
     <routes memo="">
-        <route routeProtocalInfoID="" protocalID="" nextNodeisESbNode="" beforeTransPreprocessServerName="" afterTransPreprocessServerName="" memo=""></route>
+        <route routeProtocalInfoID="rp1" protocalID="P1" nextNodeisESbNode="N1" beforeTransPreprocessServerName="" afterTransPreprocessServerName="" memo=""></route>
     </routes>
 
     <protocals memo="">
-        <protocal protocalID="" protocalType="EJB" providerUrls=""  contextFactory=""  jndi=""  userName=""  passWord=""  connetTimeOut=""  callTimeOut=""   nodeName=""  memo="">
+        <protocal protocalID="P1" protocalType="EJB" providerUrls=""  contextFactory=""  jndi=""  userName=""  passWord=""  connetTimeOut=""  callTimeOut=""   nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="JMS" providerUrls="" contextFactory="" connetFactory="" jndi="" rmiRequestTimeout="" jndiRequestTimeout=""  isSyn="" isQueue="true/false" callTimeOutOut=""  nodeName=""  memo="">
+        <protocal protocalID="P2" protocalType="JMS" providerUrls="" contextFactory="" connetFactory="" jndi="" rmiRequestTimeout="" jndiRequestTimeout=""  isSyn="" isQueue="true/false" callTimeOutOut=""  nodeName=""  memo="">
             <!-- isQueue false时为topic方式，true则为queue方式;  isSyn是否同步  false为异步方式 true为同步方式 -->
         </protocal>
-        <protocal protocalID="" protocalType="WEBSERVICE" wsdl="" methodName="" connetTime="" callTimeOut="" nodeName=""  memo="">
+        <protocal protocalID="P3" protocalType="WEBSERVICE" wsdl="" methodName="" connetTime="" callTimeOut="" nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="HESSIAN" providerUrls="" nodeName=""  memo="">
+        <protocal protocalID="P4" protocalType="HESSIAN" providerUrls="" nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="ACTIVEMQ" nodeName=""  memo="">
+        <protocal protocalID="P5" protocalType="ACTIVEMQ" nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="IBMMQ"  nodeName=""  memo="">
+        <protocal protocalID="P6" protocalType="IBMMQ"  nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="RABBITMQ" nodeName=""  memo="">
+        <protocal protocalID="P7" protocalType="RABBITMQ" nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="SOCKET" providerUrls="" callTimeOut="" nodeName=""  memo="">
+        <protocal protocalID="P8" protocalType="SOCKET" providerUrls="" callTimeOut="" nodeName=""  memo="">
         </protocal>
-        <protocal protocalID="" protocalType="FTP" providerUrls="" port="" path="" userName="" passWord=""  nodeName=""  memo="">
+        <protocal protocalID="P9" protocalType="FTP" providerUrls="" port="" path="" userName="" passWord=""  nodeName=""  memo="">
         </protocal>
     </protocals>
 </route-configuration>

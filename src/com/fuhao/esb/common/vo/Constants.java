@@ -1,12 +1,16 @@
 package com.fuhao.esb.common.vo;
 
+import com.fuhao.esb.common.request.IProtocolConf.ProtocolType;
+import com.fuhao.esb.core.component.utils.ESBLogUtils;
+import com.fuhao.esb.core.route.protocal.*;
+
 /**
  * package name is  com.fuhao.esb.common.vo
  * Created by fuhao on 13-12-23.
  * Project Name esb-java
  */
 public class Constants {
-
+    private static ESBLogUtils logger = ESBLogUtils.getLogger(Constants.class);
     public enum SEQLOG_TYPE {
         TRANS_IN,SERVICE_REQ,SERVICE_RES,TRANS_OUT;
     }
@@ -16,6 +20,84 @@ public class Constants {
     public enum ROUTE_POLICY{
         Any,FullName,StartWith,EndWith,Regex,Dynamic,User_defined // 动态路由算法
     }
+
+
+    public static ROUTE_POLICY getRoutePolicy(String name) {
+        if (name.equalsIgnoreCase(ROUTE_POLICY.FullName.name())) {
+            return ROUTE_POLICY.FullName;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.StartWith.name())) {
+            return ROUTE_POLICY.StartWith;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.EndWith.name())) {
+            return ROUTE_POLICY.EndWith;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.Regex.name())) {
+            return ROUTE_POLICY.Regex;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.Dynamic.name())) {
+            return ROUTE_POLICY.Dynamic;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.User_defined.name())) {
+            return ROUTE_POLICY.User_defined;
+        } else if (name.equalsIgnoreCase(ROUTE_POLICY.Any.name())) {
+            return ROUTE_POLICY.Any;
+        }else {
+            logger.error("此处理器类型不支持：" + name);
+            return null;
+        }
+    }
+
+
+    public static ProtocolType getProtocalType(String name) {
+        if (name.equalsIgnoreCase(ProtocolType.EJB.name())) {
+            return ProtocolType.EJB;
+        } else if (name.equalsIgnoreCase(ProtocolType.WEBSERVICE.name())) {
+            return ProtocolType.WEBSERVICE;
+        } else if (name.equalsIgnoreCase(ProtocolType.JMS.name())) {
+            return ProtocolType.JMS;
+        } else if (name.equalsIgnoreCase(ProtocolType.IBMMQ.name())) {
+            return ProtocolType.IBMMQ;
+        } else if (name.equalsIgnoreCase(ProtocolType.ACTIVEMQ.name())) {
+            return ProtocolType.ACTIVEMQ;
+        } else if (name.equalsIgnoreCase(ProtocolType.RABBITMQ.name())) {
+            return ProtocolType.RABBITMQ;
+        } else if (name.equalsIgnoreCase(ProtocolType.FTP.name())) {
+            return ProtocolType.FTP;
+        } else if (name.equalsIgnoreCase(ProtocolType.HESSIAN.name())) {
+            return ProtocolType.HESSIAN;
+        } else if (name.equalsIgnoreCase(ProtocolType.SOCKET.name())) {
+            return ProtocolType.SOCKET;
+        } else if (name.equalsIgnoreCase(ProtocolType.LOCAL.name())) {
+            return ProtocolType.LOCAL;
+        }else if (name.equalsIgnoreCase(ProtocolType.LocalXML.name())) {
+            return ProtocolType.LocalXML;
+        }else {
+            logger.error("此协议不支持：" + name);
+            return null;
+        }
+    }
+
+    public static IProtocalInfo getProtocalInfoType(String name) {
+        if (name.equalsIgnoreCase(ProtocolType.EJB.name())) {
+            return new EJBProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.WEBSERVICE.name())) {
+            return new WebServiceProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.JMS.name())) {
+            return new JMSProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.IBMMQ.name())) {
+            return new IBMMQProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.ACTIVEMQ.name())) {
+            return new ACTIVEMQProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.RABBITMQ.name())) {
+            return new RABBITMQProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.FTP.name())) {
+            return new FTPProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.HESSIAN.name())) {
+            return new HessianProtocalInfo();
+        } else if (name.equalsIgnoreCase(ProtocolType.SOCKET.name())) {
+            return new SocketProtocalInfo();
+        }else {
+            logger.error("此协议不支持：" + name);
+            return null;
+        }
+    }
+
 
     /*ejb小类 */
     public enum COMMUN_PROTOCOL_EJB_SUB_TYPE{
@@ -136,4 +218,6 @@ public class Constants {
     //交易发起时间 ,交易请求时间
     public static final String ESB_JYLS_STARTTIME="ESBJylsStartTime";
     public static final String ESB_JYLS_REQTIME="ESBJylsReqTime";
+
+
 }

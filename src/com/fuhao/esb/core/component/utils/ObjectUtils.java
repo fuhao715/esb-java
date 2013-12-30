@@ -1,5 +1,8 @@
 package com.fuhao.esb.core.component.utils;
 
+import com.fuhao.esb.common.request.IProtocolConf.ProtocolType;
+import com.fuhao.esb.common.vo.Constants;
+import com.fuhao.esb.common.vo.Constants.ROUTE_POLICY;
 import com.fuhao.esb.core.component.classloader.ESBClassLoaderManager;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
 
@@ -11,24 +14,16 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -198,6 +193,122 @@ public class ObjectUtils {
         }
 
         return parameter;
+    }
+
+    public static Object map2vo(Map map,Object vo) throws Exception{
+
+        //获得传入vo的Class方法
+        Class newClass = vo.getClass();
+        //得到vo中所有的成员变量
+        Field[] fs = newClass.getDeclaredFields();
+        //方法变量
+        String methodName = null;
+        //map的value值
+        Object mapValue = null;
+        //参数类型
+        String parameterType = null;
+        //查找方法时需要传入的参数
+        Class[] parameterTypes = new Class[1];
+        //执行invoke方法时需要传入的参数
+        Object[] args = new Object[1];
+        //取得Map的迭代器
+        Iterator it = map.keySet().iterator();
+        while (it.hasNext()) {
+            //取出map的key值
+            String key = (String)it.next();
+            if(key != null){
+                for(int i=0;i<fs.length;i++){
+                    if(key.equals(fs[i].getName())){
+                        //拼set方法名
+                        methodName = "set" + key.replaceFirst(key.substring(0, 1),key.substring(0, 1).toUpperCase());
+                        try {
+                            //得到vo中成员变量的类型
+                            parameterTypes[0] = fs[i].getType();
+                            parameterType = parameterTypes[0].toString();
+                            //找到vo中的方法
+                            Method method = newClass.getDeclaredMethod(methodName,parameterTypes);
+                            mapValue = map.get(key);
+                            //下面代码都是参数类型是什么，如果有需求可以自行增加
+                            //当set方法中的参数为int或者Integer
+                            if(parameterTypes[0] == Integer.class || parameterTypes[0] == int.class){
+                                if(mapValue instanceof Integer){
+                                    args[0] = mapValue;
+                                }else{
+                                    args[0] = Integer.parseInt((String)mapValue);
+                                }
+                                //当set方法中的参数为Date
+                            }else if(parameterTypes[0] == Long.class || parameterTypes[0] == long.class){
+                                if(mapValue instanceof Long){
+                                    args[0] = mapValue;
+                                }else{
+                                    args[0] = Long.parseLong((String)mapValue);
+                                }
+                            }else if(parameterTypes[0] == Boolean.class || parameterTypes[0] == boolean.class){
+                                if(mapValue instanceof Boolean){
+                                    args[0] = mapValue;
+                                }else{
+                                    args[0] = Boolean.parseBoolean((String)mapValue);
+                                }
+                            }else if(parameterTypes[0] == Date.class){
+                                if(mapValue instanceof Date){
+                                    args[0] = mapValue;
+                                }else{
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    args[0] = sdf.parse((String)mapValue);
+                                }
+                                //当set方法中的参数为Float
+                            }else if(parameterTypes[0] == double.class || parameterTypes[0] == Double.class){
+                                if(mapValue instanceof Double){
+                                    args[0] = mapValue;
+                                }else{
+                                    args[0] = Double.parseDouble((String)mapValue);
+                                }
+                                //当set方法中的参数为其他
+                            }else if(parameterTypes[0] == ROUTE_POLICY.class){
+                                 if(mapValue instanceof String){
+                                       args[0] = Constants.getRoutePolicy((String)mapValue);
+                                 }
+                            }else if(parameterTypes[0] == ProtocolType.class){
+                                if(mapValue instanceof String){
+                                    args[0] = Constants.getProtocalType((String)mapValue);
+                                }
+                            }else if( parameterTypes[0] == String.class){
+
+                                if(mapValue instanceof String[]){
+
+                                    String[] tempArray = (String[])mapValue;
+                                    String result = "";
+                                    for(int m=0;m<tempArray.length;m++){
+                                        result = result + tempArray[m] + ",";
+                                    }
+                                    result = result.substring(0, result.length()-1);
+                                    args[0] = result;
+
+                                }else{
+                                    args[0] = (String)mapValue;
+                                }
+                            }else {
+                                args[0] = mapValue;
+                            }
+                            //执行set方法存储数据
+                            method.invoke(vo, args);
+
+                        } catch (SecurityException e) {
+                            throw new SecurityException("[mapBind]安全异常："+ e);
+                        } catch (NoSuchMethodException e) {
+                            throw new NoSuchMethodException("[mapBind]Vo中无此方法异常" + e);
+                        } catch (IllegalArgumentException e) {
+                            throw new Exception("VO中"+key+"属性类型"+parameterType+"与Map中值为"+mapValue+"的类型不匹配");
+                        } catch (IllegalAccessException e) {
+                            throw new IllegalAccessException("[mapBind]IllegalAccessException异常");
+                        } catch (ParseException e) {
+                            throw new ParseException("[mapBind]ParseException异常", 0);
+                        }
+                    }
+                }
+            }
+        }
+        return vo;
     }
 
     /**

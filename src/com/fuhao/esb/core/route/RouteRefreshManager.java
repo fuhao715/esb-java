@@ -25,15 +25,14 @@ public class RouteRefreshManager {
     public void start() throws ESBBaseCheckedException {
 
 		/* 启动时设置初始版本号，获得表的版本号set到内存中 */
-        RouteFileUtils routeFileUtils = new RouteFileUtils() ;
-        Long version = routeFileUtils.getRouteConfVersion();
+        Long version = RouteFileUtils.getRouteConfVersion();
         if(null != version){
             RouteCache.getInstance().setRouteVersion(version);
         }else{
             RouteCache.getInstance().setRouteVersion(0L);
         }
         // 从qz_dmb中查询刷新频率时间
-        Long refreshCapacity = routeFileUtils.getRefreshCapacity();
+        Long refreshCapacity = RouteFileUtils.getRefreshCapacity();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -53,7 +52,7 @@ public class RouteRefreshManager {
     }
 
     private void refreshRoute() throws ESBBaseCheckedException{
-        Long currentVersion = new RouteFileUtils().getRouteConfVersion();
+        Long currentVersion = RouteFileUtils.getRouteConfVersion();
         if(null == currentVersion)
             currentVersion = 0L; // 若库中未配置路由版本号，默认为0L
         Long memoryVersion = RouteCache.getInstance().getRouteVersion();

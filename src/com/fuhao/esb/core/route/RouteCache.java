@@ -53,15 +53,6 @@ public class RouteCache {
 
 
     // TODO 缓存路由信息
-    public void cacheRouteRule(){}
-    public void cacheRouteConf(){}
-    public void cacheProtocalConf(){}
-
-
-
-
-
-
 
 
 
