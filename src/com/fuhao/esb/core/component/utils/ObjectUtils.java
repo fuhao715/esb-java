@@ -195,6 +195,13 @@ public class ObjectUtils {
         return parameter;
     }
 
+    /**
+     * map对象转vo对象
+     * @param map
+     * @param vo
+     * @return
+     * @throws Exception
+     */
     public static Object map2vo(Map map,Object vo) throws Exception{
 
         //获得传入vo的Class方法
