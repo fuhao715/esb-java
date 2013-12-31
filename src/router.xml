@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <route-configuration version="0" refreshCapacity="10">
     <routePolicyInfos memo="">
-        <routePolicyInfo routeRuleID="r1"  protocalEL="COO.CQ.CX" routePolicy="FULLNAME" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r1"  protocalEL="COO.CQ.CX1" routePolicy="FullName" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r2"  protocalEL="COO" routePolicy="StartWith" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r3"  protocalEL="CX3" routePolicy="EndWith" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r4"  protocalEL="^[A-Za-z]+$" routePolicy="Regex" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r5"  protocalEL="COO.CQ.CX5/C0.SD.SJ.GS" routePolicy="Dynamic" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r6"  protocalEL="com.fuhao.esb.route.rule.User_defined" routePolicy="User_defined" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
+        <routePolicyInfo routeRuleID="r7"  protocalEL="*" routePolicy="Any" routeProtocalInfoID="rp1"  memo=""></routePolicyInfo>
 
     </routePolicyInfos>
     <routes memo="">
-        <route routeProtocalInfoID="rp1" protocalID="P1" nextNodeisESbNode="N1" beforeTransPreprocessServerName="" afterTransPreprocessServerName="" memo=""></route>
+        <route routeProtocalInfoID="rp1" protocalID="P1" nextNodeisESbNode="N1" beforeTransPreprocessServerName="s1" afterTransPreprocessServerName="s2" memo=""></route>
     </routes>
 
     <protocals memo="">
