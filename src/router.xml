@@ -11,7 +11,7 @@
 
     </routePolicyInfos>
     <routes memo="">
-        <route routeProtocalInfoID="rp1" protocalID="P1" nextNodeisESbNode="N1" beforeTransPreprocessServerName="s1" afterTransPreprocessServerName="s2" memo=""></route>
+        <route routeProtocalInfoID="rp1" protocalID="P1" nextNodeisESbNode="true" beforeTransPreprocessServerName="s1" afterTransPreprocessServerName="s2" memo=""></route>
     </routes>
 
     <protocals memo="">

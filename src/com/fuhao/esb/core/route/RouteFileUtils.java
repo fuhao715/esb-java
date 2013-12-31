@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * package name is  com.fuhao.esb.core.route
@@ -86,20 +87,34 @@ public class RouteFileUtils {
         logger.info("开始初始化已经注册的" + routs.size() + "个路由");
 
 
-        // 加载路由规则处理器:
-        cacheRoutesRule(routsRule);
-        // 路由处理器
-        cacheRouts(routs);
+        /**
+         * 获取对应配置文件中的路由信息，cache顺序，先协议，后路由，在规则，因为后面书写是依赖前者的。
+         */
         // 协议处理器
-        cacheprotocals(protocals);
+        Map<String, IProtocalInfo> protocalConfigParameters = getprotocals(protocals);
+        // 路由处理器
+        Map<String, RouteProtocalInfo> routConfigParameters = getRouts(routs);
+        // 加载路由规则处理器:
+        Map<String, RoutePolicyInfo> ruleConfigParameters = getRoutesRule(routsRule);
+
+        /**
+         * 和内存中数据对比，并更新。
+         */
+        RouteCache.getInstance().cacheMapProtocalConf(protocalConfigParameters);
+        RouteCache.getInstance().cacheMapRouteConf(routConfigParameters);
+        RouteCache.getInstance().cacheMapRouteRule(ruleConfigParameters);
+
+        // update  RouteCache.getInstance().getMapRouteCacheConf()
+
+
     }
 
 
 
 
-    public  static  void   cacheRoutesRule(List<Element> routsRule)  throws ESBBaseCheckedException{
+    public  static  Map<String, RoutePolicyInfo>   getRoutesRule(List<Element> routsRule)  throws ESBBaseCheckedException{
         // 从配置文件加载组件
-        Map<String, RoutePolicyInfo> ruleConfigParameters = RouteCache.getInstance().getMapRouteRule();
+        Map<String, RoutePolicyInfo> ruleConfigParameters = new ConcurrentHashMap<String,RoutePolicyInfo>();
         for (Element rule : routsRule) {
             String id = rule.attributeValue("routeRuleID");
             // 读取结点的属性信息
@@ -113,12 +128,12 @@ public class RouteFileUtils {
             }
 
         }
-
+        return ruleConfigParameters;
     }
-    public  static  void   cacheRouts(List<Element> routs) throws ESBBaseCheckedException{
+    public  static   Map<String, RouteProtocalInfo>   getRouts(List<Element> routs) throws ESBBaseCheckedException{
 
         // 从配置文件加载组件
-        Map<String, RouteProtocalInfo> routConfigParameters = RouteCache.getInstance().getMapRouteConf();
+        Map<String, RouteProtocalInfo> routConfigParameters = new ConcurrentHashMap<String,RouteProtocalInfo>();
         for (Element rout : routs) {
             String id = rout.attributeValue("routeProtocalInfoID");
             // 读取结点的属性信息
@@ -132,12 +147,12 @@ public class RouteFileUtils {
             }
 
         }
-
+       return routConfigParameters;
     }
-    public  static  void   cacheprotocals(List<Element> protocals) throws ESBBaseCheckedException{
+    public  static  Map<String, IProtocalInfo>   getprotocals(List<Element> protocals) throws ESBBaseCheckedException{
 
         // 从配置文件加载组件
-        Map<String, IProtocalInfo> protocalConfigParameters = RouteCache.getInstance().getMapProtocalConf();
+        Map<String, IProtocalInfo> protocalConfigParameters = new ConcurrentHashMap<String,IProtocalInfo>();
         for (Element protocal : protocals) {
             String id = protocal.attributeValue("routeRuleID");
             String protocalType = protocal.attributeValue("protocalType") ;
@@ -153,7 +168,7 @@ public class RouteFileUtils {
             }
 
         }
-
+       return protocalConfigParameters;
     }
 
 

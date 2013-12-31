@@ -42,7 +42,8 @@ public class RouteProtocalInfo {
 
     public void setProtocalID(String protocalID) {
         this.protocalID = protocalID;
-        protocalInfo =RouteCache.getInstance().getMapProtocalConf().get(protocalID);
+
+
     }
 
     public String getMemo() {
@@ -62,6 +63,7 @@ public class RouteProtocalInfo {
     }
 
     public IProtocalInfo getProtocalInfo() {
+        protocalInfo =RouteCache.getInstance().getMapProtocalConf().get(protocalID);
         return protocalInfo;
     }
 
@@ -70,6 +72,8 @@ public class RouteProtocalInfo {
     }
 
     public String getNextNode() {
+        protocalInfo =RouteCache.getInstance().getMapProtocalConf().get(protocalID);
+        nextNode = protocalInfo.getNodeName();
         return nextNode;
     }
 
