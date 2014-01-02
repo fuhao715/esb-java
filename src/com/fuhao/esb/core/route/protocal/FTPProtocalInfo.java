@@ -8,6 +8,7 @@ import com.fuhao.esb.common.request.IProtocolConf;
  * Project Name esb-java
  */
 public class FTPProtocalInfo implements IProtocalInfo {
+    //TODO
     private String memo;
 
     public String getMemo() {
