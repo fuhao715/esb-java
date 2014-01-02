@@ -1,8 +1,11 @@
 package com.fuhao.esb.core.route;
 
 import com.fuhao.esb.common.request.IESBAccessMessage;
+import com.fuhao.esb.common.vo.Constants;
 import com.fuhao.esb.core.exception.ESBBaseCheckedException;
 import com.fuhao.esb.core.route.protocal.IProtocalInfo;
+import com.fuhao.esb.core.route.routepolicy.IRoutePolicyHandler;
+import com.fuhao.esb.core.route.routepolicy.RoutePolicyFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,11 +96,23 @@ public class RouteCache {
          * 1、按照相应匹配策略匹配
          * 2、cache匹配到的这个路由信息。
          */
+        Map<String,RoutePolicyInfo> mapRouteRule = RouteCache.getInstance().getMapRouteRule();
+        for (String key :mapRouteRule.keySet()) {
+            RoutePolicyInfo routePolicyInfo = mapRouteRule.get(key);
+            Constants.ROUTE_POLICY route_policy = routePolicyInfo.getRoutePolicy();
+            IRoutePolicyHandler routePolicyHandler = RoutePolicyFactory.getRoutePolicyHandler(route_policy.name());
+            if(null == routePolicyHandler){
+               throw new ESBBaseCheckedException("路由规则处理器未定义");
+            }
+            boolean isMatch = routePolicyHandler.selectRoute(message,routePolicyInfo);
+            if(isMatch){
+                protocalInfoID = routePolicyInfo.getRouteProtocalInfoID();
+                mapRouteCacheConf.put(tranID,protocalInfoID);
+                routeProtocalInfo= mapRouteConf.get(protocalInfoID);
+                return routeProtocalInfo;
+            }
 
-
-
-
-
+        }
         return routeProtocalInfo;
     }
 
