@@ -1,23 +1,30 @@
 package com.fuhao.esb.common.response;
 
-import com.fuhao.esb.common.apimessage.HeadType;
-import com.fuhao.esb.common.apimessage.RtnMeg;
-import com.fuhao.esb.common.apimessage.Service;
-
 import java.io.Serializable;
 
 /**
- * Created by fuhao on 13-12-6.
+ * package name is  com.fuhao.esb.common.response
+ * Created by fuhao on 14-2-11.
+ * Project Name esb-java
  */
-public class ESBAipReturnMessageRes implements IESBReturnMessage, Serializable {
+public class ObjectReturnMessageRes implements IESBReturnMessage, Serializable {
     /**
      *
      */
     private static final long serialVersionUID = -644293832626270030L;
-    private Service service ;
+    private Object bizObj ;
     private String transferMode;
     private boolean hasAttachment;
     private String esbMessageType;
+    private String tranID;
+    private String tranSeq;
+    private String channelID;
+    private String destinationID;
+    private String securityPublicKey;
+    /**
+     * 返回码
+     */
+    private String returnCode = null;
 
     public String getEsbMessageType() {
         return esbMessageType;
@@ -46,63 +53,45 @@ public class ESBAipReturnMessageRes implements IESBReturnMessage, Serializable {
         this.hasAttachment = hasAttachment;
     }
 
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
     @Override
     public String getTranID() {
-        return service.getHead().getTranId();
+        return tranID;
 
     }
 
     @Override
     public String getTranSeq() {
-        return service.getHead().getTranSeq();
+        return tranSeq;
     }
 
     @Override
     public String getChannelID() {
-        return service.getHead().getChannelId();
+        return channelID;
     }
 
     @Override
     public String getDestinationID() {
-        return service.getHead().getExpandValue(HeadType.DESTINATION_ID);
+        return destinationID;
     }
 
     @Override
     public String getSecurityPublicKey() {
-        return service.getHead().getExpandValue(HeadType.SECURITY_PUBLIC_KEY);
+        return securityPublicKey;
     }
 
     @Override
     public Object getBizObj() {
-        return service.getBody();
+        return bizObj;
     }
 
     @Override
     public void setBizObj(Object bizObj) {
-        service.setBody((String)bizObj);
+        this.bizObj = bizObj;
     }
 
     @Override
     public String getReturnCode() {
-        if ("0".equals(service.getHead().getRtnCode()))//可能没有rtn_msg节点
-            return "0000";
-        else{
-            if(service.getHead().getRtnMeg() == null){
-                return service.getHead().getRtnCode();
-            }
-            else{
-                return service.getHead().getRtnCode()+service.getHead().getRtnMeg().getCode();
-            }
-        }
+        return returnCode;
     }
 
     @Override
@@ -130,13 +119,27 @@ public class ESBAipReturnMessageRes implements IESBReturnMessage, Serializable {
 
     @Override
     public void setReturnCode(String returnCode) {
-        service.getHead().setRtnCode(returnCode.substring(0,1));
-        RtnMeg rtnMeg = service.getHead().getRtnMeg();
-        if(rtnMeg==null){
-            rtnMeg = new RtnMeg();
-            service.getHead().setRtnMeg(rtnMeg);
-        }
-        rtnMeg.setCode(returnCode.substring(1,4));
+        this.returnCode = returnCode;
+    }
+
+    public void setTranID(String tranID) {
+        this.tranID = tranID;
+    }
+
+    public void setTranSeq(String tranSeq) {
+        this.tranSeq = tranSeq;
+    }
+
+    public void setChannelID(String channelID) {
+        this.channelID = channelID;
+    }
+
+    public void setDestinationID(String destinationID) {
+        this.destinationID = destinationID;
+    }
+
+    public void setSecurityPublicKey(String securityPublicKey) {
+        this.securityPublicKey = securityPublicKey;
     }
 
     public long getTradeReqStartTime() {

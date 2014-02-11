@@ -8,7 +8,7 @@ import com.fuhao.esb.common.apimessage.Service;
  * Project Name esb-java
  * 可扩展接入类，把非通用报文构造成通用报文对象进入主流程，在trans环境判断对象类型，进行适配服务处理。
  */
-public class ExternalAccessMessage implements IESBAccessMessage {
+public class ObjectAccessMessage implements IESBAccessMessage {
     private Object bizObj ;
     private String tranID;
     private String tranSeq;

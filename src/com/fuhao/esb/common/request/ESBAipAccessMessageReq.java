@@ -17,6 +17,17 @@ public class ESBAipAccessMessageReq implements IESBAccessMessage,Serializable{
     private String IP;
     private String nodeCode;
     private String transferMode;
+
+    @Override
+    public Object getBizObj() {
+        return service.getBody();
+    }
+
+    @Override
+    public void setBizObj(Object bizObj) {
+        service.setBody((String)bizObj);
+    }
+
     private boolean hasAttachment;
     private long tradeReqStartTime;
     private long tradeInStartTime;
