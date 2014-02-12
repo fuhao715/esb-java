@@ -34,5 +34,9 @@
         </protocal>
         <protocal protocalID="P9" protocalType="FTP" providerUrls="" port="" path="" userName="" passWord=""  nodeName=""  memo="">
         </protocal>
+        <protocal protocalID="P10" protocalType="DYNAMIC" clientClass="" nodeName=""  memo="自定义客户端（符合标准报文，自定义协议客户端）">
+        </protocal>
+        <protocal protocalID="P11" protocalType="EXTHANG" serviceName="" nodeName=""  memo="外挂服务">
+        </protocal>
     </protocals>
 </route-configuration>
