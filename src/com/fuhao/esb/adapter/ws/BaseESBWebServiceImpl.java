@@ -16,4 +16,9 @@ public class BaseESBWebServiceImpl implements IBaseESBWebService{
     public String sendBaseXMLEsbWebService(String request) {
         return null;
     }
+
+    @Override
+    public Object sendBaseObjectEsbWebService(String tranID, Object request) {
+        return null;
+    }
 }

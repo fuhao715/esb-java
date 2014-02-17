@@ -3,6 +3,7 @@ package com.fuhao.esb.core.inbound;
 import com.fuhao.esb.common.apimessage.Expand;
 import com.fuhao.esb.common.request.ESBAipAccessMessageReq;
 import com.fuhao.esb.common.request.IESBAccessMessage;
+import com.fuhao.esb.common.request.ObjectAccessMessage;
 import com.fuhao.esb.common.response.IESBReturnMessage;
 import com.fuhao.esb.common.vo.Constants.SEQLOG_TYPE;
 import com.fuhao.esb.common.vo.Constants;
@@ -99,6 +100,15 @@ public abstract class AbstractAccessHandler {
         } catch (Exception e) {
             throw new ESBBaseCheckedException("报文bean2XML格式转换错误！", e);
         }//返回转XML
+    }
+
+    public Object processAccessObject(String tranID, Object message) throws ESBBaseCheckedException{
+        ObjectAccessMessage beanMessage = new ObjectAccessMessage();
+        beanMessage.setBizObj(message);  ;
+        beanMessage.setTranID(tranID);  //TODO
+        IESBReturnMessage respEvent = processAccessBean(beanMessage);
+
+        return respEvent.getBizObj();
     }
 
     public String processAccessXML(String xmlMessage,String esbMessageType)throws ESBBaseCheckedException{

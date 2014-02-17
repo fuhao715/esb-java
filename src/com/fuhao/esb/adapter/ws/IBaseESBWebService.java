@@ -27,5 +27,11 @@ public interface IBaseESBWebService {
     public String sendBaseXMLEsbWebService(
             @WebParam(name = "reqbaseXml", targetNamespace = "http://www.fuhao.net/spec/", partName = "request")
             String request);
+
+    @WebMethod
+    @WebResult(name = "reqbaseObject", targetNamespace = "http://www.fuhao.net/spec/", partName = "response")
+    public Object sendBaseObjectEsbWebService(@WebParam(name = "tranID", targetNamespace = "http://www.fuhao.net/spec/", partName = "tranID") String tranID,
+            @WebParam(name = "reqbaseObject", targetNamespace = "http://www.fuhao.net/spec/", partName = "request")
+            Object request);
 }
 

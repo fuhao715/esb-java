@@ -2,6 +2,7 @@ package com.fuhao.esb.client.ejb;
 
 import com.fuhao.esb.client.IBaseESBClientMessageSender;
 import com.fuhao.esb.client.IBaseESBMessageReceiver;
+import com.fuhao.esb.client.IObjectESBMessageReceiver;
 import com.fuhao.esb.client.IXmlMessageReceiver;
 import com.fuhao.esb.common.request.IESBAccessMessage;
 import com.fuhao.esb.common.response.IESBReturnMessage;
@@ -27,6 +28,12 @@ public class AipEJBClient extends BaseEJBClient implements IBaseESBClientMessage
     public String sendXML(String xml) throws Exception {
         IXmlMessageReceiver sender = getReceiver();
         return sender.receiveXML(xml);
+    }
+
+    @Override
+    public Object sendObject(String tranID, Object message) throws Exception {
+        IObjectESBMessageReceiver sender = (IObjectESBMessageReceiver)getReceiver();
+        return sender.sendObject(tranID, message);
     }
 
     @Override

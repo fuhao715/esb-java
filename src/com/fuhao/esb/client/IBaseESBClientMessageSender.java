@@ -30,5 +30,7 @@ public interface IBaseESBClientMessageSender {
      */
     String sendXML(String xml) throws Exception;
 
+    public Object sendObject(String tranID, Object message)throws Exception;
+
     IXmlMessageReceiver getReceiver() throws Exception;
 }

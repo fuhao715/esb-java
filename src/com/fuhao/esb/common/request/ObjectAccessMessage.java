@@ -1,6 +1,6 @@
 package com.fuhao.esb.common.request;
 
-import com.fuhao.esb.common.apimessage.Service;
+import java.util.UUID;
 
 /**
  * package name is  com.fuhao.esb.common.request
@@ -11,7 +11,7 @@ import com.fuhao.esb.common.apimessage.Service;
 public class ObjectAccessMessage implements IESBAccessMessage {
     private Object bizObj ;
     private String tranID;
-    private String tranSeq;
+    private String tranSeq= UUID.randomUUID().toString().replaceAll("-", "");
     private String channelID;
     private String destinationID;
     private String securityPublicKey;
