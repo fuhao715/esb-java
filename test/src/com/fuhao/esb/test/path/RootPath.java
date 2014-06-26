@@ -13,10 +13,10 @@ import com.fuhao.esb.core.route.RouteFileUtils;
  */
 public class RootPath {
     public static void main(String []args){
-        try {
+       /* try {
             new RouteFileUtils().loadRoutConfigParameters();
         } catch (ESBBaseCheckedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }

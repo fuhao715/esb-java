@@ -53,5 +53,11 @@ public class BaseHessianClient implements IBaseESBClientMessageSender {
         return (IBaseESBMessageReceiver)factory.create(url);
     }
 
+	@Override
+	public Object sendObject(String tranID, Object message) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 

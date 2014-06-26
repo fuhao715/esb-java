@@ -66,5 +66,11 @@ public class SocketClient implements IBaseESBClientMessageSender {
     public IXmlMessageReceiver getReceiver() throws Exception {
         return null;
     }
+
+	@Override
+	public Object sendObject(String tranID, Object message) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
